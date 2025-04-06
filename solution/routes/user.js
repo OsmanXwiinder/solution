@@ -30,11 +30,12 @@ router.get('/courses',async (req,res) => {
 router.post('/courses/:courseId',userMiddleware, (req,res) => {
     const courseId = req.params.courseId;
     const username = req.headers.username;
+    //zod
     User.updateOne({
         username:username,       
     },{
-        purchasedCourses:{
-            "$push":new mongoose.Types.ObjectId(courseId)
+        "$push":{
+            purchasedCourses:courseId
         }
     }).catch((e) => {
         console.log(e)
@@ -42,6 +43,20 @@ router.post('/courses/:courseId',userMiddleware, (req,res) => {
     res.json({
         msg:"course purchased Successfully -_-"
     }) 
+})
+
+//  how they get  puchased courses
+router.get('/purchasedCourses',userMiddleware,async (req,res) => {
+    const user = await User.findOne({
+        username:req.headers.username,
+    })
+    console.log(user.purchasedCourses)
+    const courses = await Course.find({
+        _id:{
+            "$in":user.purchasedCourses
+        }
+    })
+    res.json({courses})
 })
 
 module.exports = router
