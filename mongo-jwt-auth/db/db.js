@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect("mongodb+srv://osmansaifi30:VI5Xirc5TtXJTEl4@cluster0.tze6j.mongodb.net/course_selling_app")   
+mongoose.connect("mongodb+srv://osmansaifi30:VI5Xirc5TtXJTEl4@cluster0.tze6j.mongodb.net/course_selling_app2")   
 .then(() => console.log("Connected To DB"))
 
 const UserSchema = new mongoose.Schema({

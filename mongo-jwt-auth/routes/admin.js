@@ -6,7 +6,7 @@ require('dotenv').config();
 const  secret = process.env.secret
 
 
-const {Admin} = require('../db/db');
+const {Admin, Course} = require('../db/db');
 
 
 router.post('/signup',async (req,res) => {
@@ -14,8 +14,8 @@ router.post('/signup',async (req,res) => {
     const password = req.body.password
 
     await Admin.create({
-        username,
-        password
+        username:username,
+        password:password
     })
 
     res.status(200).json({msg:"Your Signin Success"})
@@ -42,12 +42,36 @@ router.post('/signin' , async (req,res) => {
     
 })
 
-router.post('/courses',(req,res) => {
+router.post('/courses',adminMiddleware,async (req,res) => {
+    // implemnet Course logic
+    const title = req.body.title
+    const description = req.body.description
+    const price = req.body.price
+    const Imagelink = req.body.Imagelink
+
+    const newCourse =  await Course.create({
+        title,
+        description,
+        price,
+        Imagelink
+
+    })
+
+    res.status(200).json({
+        msg:"Course Created Successfully",
+        courseId:newCourse._id
+    })
 
 })
 
-router.get('/courses', (req,res) => {
+router.get('/courses',adminMiddleware, async (req,res) => {
+    
+    
+    const allCourses = await Course.find({})
 
+    res.status(200).json({
+        allCourses
+    })
 })
 
 module.exports = router;
