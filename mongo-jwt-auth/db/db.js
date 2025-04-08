@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const { User } = require('../../mongoLittleProject/db');
 
 
-mongoose.connect("mongodb+srv://osmansaifi30:VI5Xirc5TtXJTEl4@cluster0.tze6j.mongodb.net/jwt_ap")
+mongoose.connect("mongodb+srv://osmansaifi30:VI5Xirc5TtXJTEl4@cluster0.tze6j.mongodb.net/course_selling_app")   
 .then(() => console.log("Connected To DB"))
 
 const UserSchema = new mongoose.Schema({
@@ -22,7 +21,7 @@ const CourseSchema = new mongoose.Schema({
     Image_link:String
 })
 
-const user = mongoose.model('user',UserSchema);
+const User = mongoose.model('user',UserSchema);
 const Admin = mongoose.model('Admin', AdminSchema);
 const Course = mongoose.model('Course',CourseSchema);
 

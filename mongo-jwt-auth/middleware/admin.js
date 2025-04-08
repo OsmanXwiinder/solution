@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const secret  = require('../index')
+require('dotenv').config();
+const  secret = process.env.secret
 
 function adminMiddleware(){
     // Implement admin auth logic
