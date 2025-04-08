@@ -1,6 +1,34 @@
 const mongoose = require('mongoose');
-const env = require('dotenv').config()
-const dbLink = process.env.DB_link;
-console.log(dbLink)
-mongoose.connect(dbLink)
+const { User } = require('../../mongoLittleProject/db');
+
+
+mongoose.connect("mongodb+srv://osmansaifi30:VI5Xirc5TtXJTEl4@cluster0.tze6j.mongodb.net/jwt_ap")
 .then(() => console.log("Connected To DB"))
+
+const UserSchema = new mongoose.Schema({
+    username:String,
+    password:String
+})
+
+const AdminSchema = new mongoose.Schema({
+    username:String,
+    password:String
+})
+
+const CourseSchema = new mongoose.Schema({
+    title:String,
+    description:String,
+    price:Number,
+    Image_link:String
+})
+
+const user = mongoose.model('user',UserSchema);
+const Admin = mongoose.model('Admin', AdminSchema);
+const Course = mongoose.model('Course',CourseSchema);
+
+
+module.exports = {
+    User,
+    Admin,
+    Course
+}
