@@ -6,7 +6,11 @@ mongoose.connect("mongodb+srv://osmansaifi30:VI5Xirc5TtXJTEl4@cluster0.tze6j.mon
 
 const UserSchema = new mongoose.Schema({
     username:String,
-    password:String
+    password:String,
+    purchasedCourses:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Course'
+    }]
 })
 
 const AdminSchema = new mongoose.Schema({

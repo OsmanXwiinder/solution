@@ -5,12 +5,12 @@ const  bodyParser = require('body-parser')
 
 
 const AdminRoute = require('./routes/admin')
-// const UserRoute = require('./routes/user')
+const UserRoute = require('./routes/user')
 
 
 app.use(bodyParser.json());
 app.use('/admin', AdminRoute);
-// app.use('/user', UserRoute);
+app.use('/user', UserRoute);
 
 
 

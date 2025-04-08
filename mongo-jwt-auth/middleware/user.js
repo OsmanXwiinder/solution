@@ -6,7 +6,7 @@ const  secret = process.env.secret
 
 
 function usermiddleware(req,res,next){
-    const token = req.headers.authorization
+    const token = req.headers.authorization;
     const userword = token.split(" ");
     const jsonToken = userword[1];
     const decodedvalue = jwt.verify(jsonToken, secret);
