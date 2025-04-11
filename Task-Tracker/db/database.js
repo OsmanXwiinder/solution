@@ -1,18 +1,18 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
-const dbLink = process.env.dbLink
-// console.log(dbLink)
+const db_Link = process.env.db_Link
+console.log(db_Link)
 
 
-mongoose.connect(dbLink).then(() => console.log("Connected To Db "))
+mongoose.connect(db_Link).then(() => console.log("Connected To Db "))
 
 
  const taskCollectionSchema = new mongoose.Schema({
     title:String,
     description:String,
     status:Boolean,
-    createdAt:TimeRanges,
-    updatedAt:TimeRanges
+    createdAt:Date,
+    updatedAt:Date
  })
 
  const UserSchema = new mongoose.Schema({
