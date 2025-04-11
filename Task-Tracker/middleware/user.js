@@ -5,16 +5,21 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 console.log(JWT_SECRET);
 
-function usermiddleware(req,res){
+function usermiddleware(req,res,next){
     const username = req.headers.username;
-    const password = req.headers.password;
+    const tokenValue = req.headers.authorization;
 
-    const decodedvalue = jwt.verify({username},JWT_SECRET);
-    
-    if(decodedvalue){
+    const token = tokenValue.split(" ")[1]
+
+    try{
+        const decoded = jwt.verify(token,JWT_SECRET)
+        req.username = decoded.username
         next()
-    } else {
-        res.status(403).json({msg:"User Not Verified"});
+    } catch(e) {
+        res.status(403).json({
+            msg:"Error"
+        })
+        console.log(e)
     }
 
 

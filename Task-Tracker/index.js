@@ -4,11 +4,11 @@ require('dotenv').config()
 const port = process.env.port
 
 const userRouter = require('./routes/user')
-
+const taskRouter = require('./routes/task')
 
 app.use(express.json());
 app.use('/user',userRouter);
-// app.use('./task',)        
+app.use('/task',taskRouter);        
 
 
 
